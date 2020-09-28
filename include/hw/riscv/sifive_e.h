@@ -22,6 +22,7 @@
 #include "hw/riscv/riscv_hart.h"
 #include "hw/riscv/sifive_cpu.h"
 #include "hw/gpio/sifive_gpio.h"
+#include "hw/rtc/hlk_sifive_rtc.h"
 
 #define TYPE_RISCV_E_SOC "riscv.sifive.e.soc"
 #define RISCV_E_SOC(obj) \
@@ -35,6 +36,7 @@ typedef struct SiFiveESoCState {
     RISCVHartArrayState cpus;
     DeviceState *plic;
     SIFIVEGPIOState gpio;
+    HlkRtcState rtc;
     MemoryRegion xip_mem;
     MemoryRegion mask_rom;
 } SiFiveESoCState;
@@ -75,6 +77,7 @@ enum {
 };
 
 enum {
+    SIFIVE_E_HLK_RTC0_IRQ = 2,
     SIFIVE_E_UART0_IRQ  = 3,
     SIFIVE_E_UART1_IRQ  = 4,
     SIFIVE_E_GPIO0_IRQ0 = 8
